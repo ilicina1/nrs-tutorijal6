@@ -2,9 +2,9 @@ let server = require("../server")
 let chai = require("chai")
 let chaiHttp = require("chai-http")
 let mocha = require("mocha")
-import { startDataBase } from '../app.js';
-import { closeDataBase } from '../app.js';
-import { befAndAftEach } from '../app.js'
+import { startDataBase } from '../database.js';
+import { closeDataBase } from '../database.js';
+import { befAndAftEach } from '../database.js'
 
 chai.should()
 chai.use(chaiHttp)
@@ -13,19 +13,19 @@ chai.use(chaiHttp)
 describe('Api', () => {
 
     before(function () {
-        startDb()
+        startDataBase()
     });
 
     after(function () {
-        closeDb()
+        closeDataBase()
     });
 
     beforeEach(function () {
-        beforeAndAfterEachShowGradove()
+        befAndAftEach()
     });
 
     afterEach(function () {
-        beforeAndAfterEachShowGradove()
+        befAndAftEach()
     });
 
     it("should return status code 200, json,not array and not 0 for GET /gradovi/{id}", (done) => {
